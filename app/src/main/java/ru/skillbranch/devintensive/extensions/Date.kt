@@ -30,10 +30,9 @@ fun Date.add(value: Int, timeUnits: TimeUnits): Date {
     return this
 }
 
-fun Date.humanizeDiff(): String {
+fun Date.humanizeDiff(date: Date = Date()): String {
 
-    val dateNow = Date()
-    var diffDate = dateNow.time - this.time
+    var diffDate = date.time - this.time
 
     if (diffDate < 0) {
         diffDate *= -1
