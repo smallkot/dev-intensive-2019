@@ -58,7 +58,7 @@ object Utils {
                 'ц' -> "c"
                 'ч' -> "ch"
                 'ш' -> "sh"
-                'щ' -> "sh'"
+                'щ' -> "sh"
                 'ъ' -> ""
                 'ы' -> "i"
                 'ь' -> ""
@@ -68,7 +68,7 @@ object Utils {
                 ' ' -> divider
                 else -> letter
             }
-            result += if(isUpperCase) letterTemp.toUpperCase() else letterTemp
+            result += if(isUpperCase) letterTemp[0].toUpperCase() else letterTemp
         }
         return result
     }

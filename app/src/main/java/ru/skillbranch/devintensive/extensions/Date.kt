@@ -15,7 +15,7 @@ enum class TimeUnits {
     DAY
 }
 
-fun Date.formate(pattern: String = "HH:mm:ss dd.MM.yy"): String {
+fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
     return dateFormat.format(this)
 }

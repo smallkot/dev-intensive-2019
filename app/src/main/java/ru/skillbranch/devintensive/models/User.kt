@@ -12,6 +12,19 @@ data class User(val id : String,
                 var lastVisit : Date? = Date(),
                 var isOnline : Boolean = false) {
 
+    constructor(id: String, firstName: String?, lastName: String?) : this(
+        id = id,
+        firstName = firstName,
+        lastName = lastName,
+        avatar = null
+    )
+
+    constructor(id: String) : this(id, "John", "Doe $id")
+
+    init {
+        println("It's Alive!!! \nHis name is $firstName $lastName")
+    }
+
     companion object Factory {
         private var indexId = -1
         fun makeUser(fullName: String?): User {
