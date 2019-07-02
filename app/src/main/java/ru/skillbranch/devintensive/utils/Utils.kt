@@ -23,4 +23,53 @@ object Utils {
 
         return if (printStr.isEmpty()) null else printStr
     }
+
+    fun transliteration(payload: String, divider: String = " "): String {
+        if (payload.isEmpty()) return ""
+
+        var result = ""
+        for (letter in payload) {
+            val isUpperCase = letter.isUpperCase()
+            var letterTemp = ""
+            letterTemp += when(letter.toLowerCase()) {
+                'а' -> "a"
+                'б' -> "b"
+                'в' -> "v"
+                'г' -> "g"
+                'д' -> "d"
+                'е' -> "e"
+                'ё' -> "e"
+                'ж' -> "zh"
+                'з' -> "z"
+                'и' -> "i"
+                'й' -> "i"
+                'к' -> "k"
+                'л' -> "l"
+                'м' -> "m"
+                'н' -> "n"
+                'о' -> "o"
+                'п' -> "p"
+                'р' -> "r"
+                'с' -> "s"
+                'т' -> "t"
+                'у' -> "u"
+                'ф' -> "f"
+                'х' -> "h"
+                'ц' -> "c"
+                'ч' -> "ch"
+                'ш' -> "sh"
+                'щ' -> "sh'"
+                'ъ' -> ""
+                'ы' -> "i"
+                'ь' -> ""
+                'э' -> "e"
+                'ю' -> "yu"
+                'я' -> "ya"
+                ' ' -> divider
+                else -> letter
+            }
+            result += if(isUpperCase) letterTemp.toUpperCase() else letterTemp
+        }
+        return result
+    }
 }
