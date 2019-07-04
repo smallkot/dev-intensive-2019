@@ -12,7 +12,32 @@ enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
-    DAY
+    DAY;
+
+    private val seconds = listOf("секунду", "секунды", "секунд")
+    private val minutes = listOf("минуту", "минуты", "минут")
+    private val hours = listOf("час", "часа", "часов")
+    private val days = listOf("день", "дня", "дней")
+
+    fun plural(value: Int): String {
+        var result = "$value "
+        val index = if (value%100 < 20) getIndex(value%100) else getIndex(value%10)
+        result += when(this) {
+            SECOND -> seconds[index]
+            MINUTE -> minutes[index]
+            HOUR -> hours[index]
+            DAY -> days[index]
+        }
+        return result
+    }
+
+    private fun getIndex(value: Int): Int {
+        return when(value) {
+            1 -> 0
+            in 2..4 -> 1
+            else -> 2
+        }
+    }
 }
 
 fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
