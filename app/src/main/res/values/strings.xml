@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Dev-intensive</string>
+    <string name="app_name">Chat Dev-intensive</string>
+    <string name="incorrect_answer">Это не правильный ответ!</string>
+    <string name="correct_answer">Отлично - это правильный ответ!</string>
 </resources>

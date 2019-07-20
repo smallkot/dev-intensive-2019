@@ -10,7 +10,7 @@ abstract class BaseMessage(val id: String,
     abstract fun formatMessage(): String
 
     companion object AbstractFactory {
-        var indexId = -1;
+        var indexId = -1
         fun makeMessage(from: User?, chat: Chat, date: Date = Date(), type: String = "text", payload: Any?, isIncoming: Boolean = false): BaseMessage {
             indexId++
             return when (type) {
