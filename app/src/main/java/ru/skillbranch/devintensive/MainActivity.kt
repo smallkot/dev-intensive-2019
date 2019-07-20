@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         messageEt.setOnEditorActionListener { _, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_DONE){
-                sendAnswer(messageEt.text.toString().toLowerCase())
+                sendAnswer()
                 true
             } else {
                 false
@@ -58,12 +58,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.iv_send) {
-            sendAnswer(messageEt.text.toString())
+            sendAnswer()
         }
     }
 
-    private fun sendAnswer(answer: String) {
-        val (phrase, color) = benderObj.listenAnswer(answer)
+    private fun sendAnswer() {
+        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
         val (r,g,b) = color
         benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
