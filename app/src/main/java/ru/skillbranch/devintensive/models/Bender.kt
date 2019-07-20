@@ -58,7 +58,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         val (success, errorString) = validationAnswer(answer)
         if (!success) {
-            return errorString to status.color
+            return errorString + "\n" + question.question to status.color
         }
         return if (question.answers.contains(answer.toLowerCase())) {
             question = question.nextQuestion()
@@ -74,8 +74,8 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         }
     }
 
-    fun validationAnswer(answer: String): Pair<Boolean, String> {
-        val validation = when (question) {
+    private fun validationAnswer(answer: String): Pair<Boolean, String> {
+        when (question) {
             Question.NAME -> {
                 if (answer[0].isLowerCase()) {
                     return Pair(false, "Имя должно начинаться с заглавной буквы")
