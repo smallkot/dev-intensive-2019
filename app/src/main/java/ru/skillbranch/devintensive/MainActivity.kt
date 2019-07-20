@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun sendAnswer() {
         if (messageEt.length() == 0) {
+            hideKeyboard()
             return
         }
         val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
