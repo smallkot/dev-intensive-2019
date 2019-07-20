@@ -56,6 +56,10 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
+        val (success, errorString) = validationAnswer(answer)
+        if (!success) {
+            return errorString to status.color
+        }
         return if (question.answers.contains(answer.toLowerCase())) {
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
@@ -66,6 +70,44 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
             } else {
                 "Это неправильный ответ\n${question.question}" to status.color
+            }
+        }
+    }
+
+    fun validationAnswer(answer: String): Pair<Boolean, String> {
+        val validation = when (question) {
+            Question.NAME -> {
+                if (answer[0].isLowerCase()) {
+                    return Pair(false, "Имя должно начинаться с заглавной буквы")
+                }
+                return Pair(true, "")
+            }
+            Question.PROFESSION -> {
+                if (answer[0].isUpperCase()) {
+                    return Pair(false, "Профессия должна начинаться со строчной буквы")
+                }
+                return Pair(true, "")
+            }
+            Question.MATERIAL -> {
+                if (answer.contains(Regex("\"^\\d\$\""))) {
+                    return Pair(false, "Материал не должен содержать цифр")
+                }
+                return Pair(true, "")
+            }
+            Question.BDAY -> {
+                if (answer.toLongOrNull() == null) {
+                    return Pair(false, "Год моего рождения должен содержать только цифры")
+                }
+                return Pair(true, "")
+            }
+            Question.SERIAL -> {
+                if (answer.toLongOrNull() == null || answer.length != 7) {
+                    return Pair(false, "Серийный номер содержит только цифры, и их 7")
+                }
+                return Pair(true, "")
+            }
+            Question.IDLE -> {
+                return Pair(true, "")
             }
         }
     }
