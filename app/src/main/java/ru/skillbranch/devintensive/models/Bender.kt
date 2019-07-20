@@ -89,7 +89,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 return Pair(true, "")
             }
             Question.MATERIAL -> {
-                if (answer.contains(Regex("\"^\\d\$\""))) {
+                if (Regex("""\d+""").containsMatchIn(answer)) {
                     return Pair(false, "Материал не должен содержать цифр")
                 }
                 return Pair(true, "")
